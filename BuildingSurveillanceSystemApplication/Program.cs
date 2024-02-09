@@ -138,12 +138,12 @@ namespace BuildingSurveillanceSystemApplication
             //LINQ  的Lambda表达式 e => e.Id == externalVisitor.Id：这是一个 Lambda 表达式，用于指定查找条件。
             //它表示对于 _externalVisitors 列表中的每个外部访客对象 e，如果 e 的 Id 属性等于当前遍历到的 externalVisitor 对象的 Id 属性，
             //则返回 true，否则返回 false。
+            //检查当前接收到的外部访客是否已经存在于 _externalVisitors 列表中
                 var externalVisitorListItem = _externalVisitors.FirstOrDefault(e => e.Id == externalVisitor.Id);
                  //如果== NULL 表示外部访客头一次到建筑大楼
-                if (externalVisitorListItem == null)//没有找到xiangtongid
-                
+                if (externalVisitorListItem == null)// 如果不存在就加入并输出先关的
                 {
-                    _externalVisitors.Add(externalVisitor);
+                    _externalVisitors.Add(externalVisitor); 
                     
                     OutputFormatter.ChangeOutputTheme(OutputFormatter.TextOutputTheme.Employee);
                     
@@ -155,11 +155,11 @@ namespace BuildingSurveillanceSystemApplication
                 }
                 else
                 {
-                //如果访客已经离开了
+               、、 则表示这是之前已经通知过的访客，需要更新其在建筑物内的状态，并输出相应的安全通知。
                     if (externalVisitor.InBuilding == false)
                     {
                         //update local external visitor list item with data from the external visitor object passed in from the observable object
-                        externalVisitorListItem.InBuilding = false;
+                        externalVisitorListItem.InBuilding = false; // 更新列表中的对应状态
                         externalVisitorListItem.ExitDateTime = externalVisitor.ExitDateTime;
                     }
                 }
