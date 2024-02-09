@@ -310,6 +310,8 @@ namespace BuildingSurveillanceSystemApplication
 //如果找到了对应的外部访客对象，则更新其离开时间和在建筑物状态，并向观察者列表中的每个观察者发送更新后的外部访客信息。
         public void ConfirmExternalVisitorExitsBuilding(int externalVisitorId, DateTime exitDateTime)
         {
+        //
+//FirstOrDefault 是 LINQ 中的一个方法，它用于从序列中获取第一个元素，如果序列为空，则返回默认值。如果序列不为空，则返回序列中的第一个元素。
             var externalVisitor = _externalVisitors.FirstOrDefault(e => e.Id == externalVisitorId);
 
             if (externalVisitor != null)
